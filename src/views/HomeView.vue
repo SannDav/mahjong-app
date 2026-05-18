@@ -1,41 +1,22 @@
 <script setup>
+import { useRouter } from 'vue-router'
+import { projects } from '../data/projects.js'
 import RevealHeading from '../components/RevealHeading.vue'
 import AnimateInView from '../components/AnimateInView.vue'
 
-const projects = [
-  {
-    title: 'Neon Commerce',
-    type: 'UI / Front-End',
-    desc: 'Experimental e-commerce experience with animated transitions and layered visuals.'
-  },
-  {
-    title: 'AI Canvas Lab',
-    type: 'Creative AI',
-    desc: 'Interactive AI playground for image prompts, text generation, and design experiments.'
-  },
-  {
-    title: 'Pulse Dashboard',
-    type: 'Data Experience',
-    desc: 'Asymmetrical analytics dashboard focused on storytelling and interaction.'
-  },
-  {
-    title: 'Void Motion',
-    type: 'Creative Coding',
-    desc: 'Visual playground mixing WebGL particles, sound, and responsive motion.'
-  }
-]
+const router = useRouter()
 
 const skills = [
   'HTML',
   'CSS',
   'JavaScript',
+  'PHP',
   'Vue',
-  'React',
-  'Node.js',
   'Laravel',
-  'UI Design',
-  'Creative Coding',
-  'AI Tools'
+  'Blade',
+  'Tailwind',
+  'Python',
+  'Git'
 ]
 </script>
 
@@ -54,14 +35,14 @@ const skills = [
         <div class="flex gap-6 text-sm uppercase tracking-widest text-zinc-400">
           <a href="#projects" class="hover:text-white transition">Projects</a>
           <a href="#skills" class="hover:text-white transition">Skills</a>
-          <a href="#playground" class="hover:text-white transition">Playground</a>
+          <a href="https://github.com/SannDav" target="_blank" class="hover:text-white transition">GitHub</a>
         </div>
       </nav>
 
       <div class="grid md:grid-cols-[1.4fr_0.6fr] gap-10 items-center relative z-10 mt-16 md:mt-0">
         <div>
           <p class="uppercase tracking-[0.4em] text-zinc-500 mb-4 text-sm">
-            Designer × Developer × Experimenter
+            Student × Developer × Experimenter
           </p>
 
           <RevealHeading
@@ -70,16 +51,16 @@ const skills = [
             :stagger-ms="90"
             :threshold="0.3"
             :words="[
-              { text: 'Breaking' },
-              { text: 'Digital', class: 'block text-zinc-500 italic ml-8 md:ml-20' },
-              { text: 'Patterns.' }
+              { text: 'Building' },
+              { text: 'Better', class: 'block text-zinc-500 italic ml-8 md:ml-20' },
+              { text: 'Webs.' }
             ]"
           />
 
           <p class="mt-8 max-w-2xl text-zinc-300 text-lg leading-relaxed">
-            I create bold digital experiences that blend design systems,
-            creative development, motion, and AI experimentation into one
-            expressive playground.
+            Student-developer from Batam, exploring full-stack web
+            development with Laravel, Vue, and modern frontend tools.
+            Always building, always learning.
           </p>
         </div>
 
@@ -91,41 +72,28 @@ const skills = [
 
             <div class="space-y-4 text-sm">
               <div class="flex justify-between border-b border-zinc-200 pb-2">
-                <span>Mode</span>
-                <span>Creative Chaos</span>
+                <span>Currently Learning</span>
+                <span>Vue + Laravel</span>
               </div>
 
               <div class="flex justify-between border-b border-zinc-200 pb-2">
                 <span>Focus</span>
-                <span>AI + Web</span>
+                <span>Full-Stack Web</span>
               </div>
 
               <div class="flex justify-between border-b border-zinc-200 pb-2">
-                <span>Status</span>
-                <span>Building</span>
+                <span>Level</span>
+                <span>Always Learning</span>
               </div>
             </div>
 
-            <button class="mt-8 bg-black text-white w-full py-3 rounded-full hover:scale-105 transition">
-              Explore Work
-            </button>
+            <a href="https://github.com/SannDav" target="_blank" class="mt-8 bg-black text-white w-full block text-center py-3 rounded-full hover:scale-105 transition">
+              Follow My Journey
+            </a>
           </div>
         </div>
       </div>
 
-      <div class="relative z-10 flex flex-wrap gap-4 mt-16 md:mt-0">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-full px-5 py-3 text-sm uppercase tracking-widest">
-          Creative Front-End
-        </div>
-
-        <div class="bg-white text-black rounded-full px-5 py-3 text-sm uppercase tracking-widest font-semibold">
-          AI Playground
-        </div>
-
-        <div class="bg-zinc-900 border border-zinc-800 rounded-full px-5 py-3 text-sm uppercase tracking-widest">
-          Motion Systems
-        </div>
-      </div>
     </section>
 
     <!-- PROJECTS -->
@@ -137,9 +105,9 @@ const skills = [
           </p>
 
           <h3 class="text-5xl md:text-7xl font-black leading-none uppercase">
-            Project
-            <span class="block italic text-zinc-400 ml-10">
-              Grid
+            My
+            <span class="block italic text-zinc-400 ml-10" >
+              Projects
             </span>
           </h3>
         </AnimateInView>
@@ -153,7 +121,9 @@ const skills = [
             :rotate="index % 2 === 0 ? 1.5 : -1.5"
             :duration="0.8"
           >
-            <div
+            <a
+              @click.prevent="router.push(`/project/${project.slug}`)"
+              :href="`/project/${project.slug}`"
               :class="[
                 'project-card group rounded-[2rem] p-8 min-h-[260px] flex flex-col justify-between transition duration-500 cursor-pointer',
                 index % 2 === 0 ? 'bg-black text-white' : 'bg-zinc-100 border border-zinc-200'
@@ -170,9 +140,9 @@ const skills = [
               </div>
 
               <p class="mt-8 opacity-80 leading-relaxed">
-                {{ project.desc }}
+                {{ project.shortDesc }}
               </p>
-            </div>
+            </a>
           </AnimateInView>
         </div>
       </div>
@@ -202,9 +172,8 @@ const skills = [
         </div>
 
         <p class="max-w-xl text-zinc-400 leading-relaxed">
-          I enjoy building interfaces that feel alive — combining visual
-          storytelling, developer logic, smooth interactions, and modern AI
-          tools into one creative workflow.
+          Tech stack yang lagi aku pelajari dan pakai buat bikin web.
+          Dari Laravel backend sampe Vue frontend — makin dalem, makin seru.
         </p>
       </AnimateInView>
 
@@ -233,8 +202,8 @@ const skills = [
       </div>
     </section>
 
-    <!-- PLAYGROUND -->
-    <section id="playground" class="px-6 md:px-16 py-24 bg-gradient-to-b from-zinc-950 to-black">
+    <!-- LAB -->
+    <section id="lab" class="px-6 md:px-16 py-24 bg-gradient-to-b from-zinc-950 to-black">
       <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
         <AnimateInView
           as="div"
@@ -248,16 +217,16 @@ const skills = [
           </p>
 
           <h3 class="text-5xl md:text-8xl font-black uppercase leading-none font-heading">
-            AI
+            Random
             <span class="block italic text-zinc-600 ml-10">
-              Playground
+              Lab
             </span>
           </h3>
 
           <p class="mt-10 max-w-2xl text-zinc-300 leading-relaxed text-lg">
-            A dedicated space for testing generative visuals, prompt systems,
-            interactive experiments, and weird creative ideas that sit between
-            art and code.
+            Tempat aku bereksperimen dengan project-project random,
+            belajar teknologi baru, dan kadang-kadang bikin sesuatu
+            yang cuma kelihatan keren aja.
           </p>
         </AnimateInView>
 
@@ -286,15 +255,15 @@ const skills = [
 
             <div class="space-y-4 text-sm">
               <div class="bg-zinc-100 rounded-2xl p-4 hover:translate-x-2 transition">
-                AI-generated visual systems
+                Nyoba-nyoba Vue 3 component + animasi
               </div>
 
               <div class="bg-zinc-100 rounded-2xl p-4 hover:translate-x-2 transition">
-                Interactive prompt playground
+                Eksperimen Laravel + Livewire
               </div>
 
               <div class="bg-zinc-100 rounded-2xl p-4 hover:translate-x-2 transition">
-                Motion + sound experiments
+                Project iseng + belajar hal baru
               </div>
             </div>
           </div>
@@ -310,21 +279,17 @@ const skills = [
         </h4>
 
         <p class="text-zinc-500 mt-2 text-sm uppercase tracking-widest">
-          Building strange but beautiful digital experiences.
+          Masih belajar, tapi gak pernah berhenti.
         </p>
       </div>
 
       <div class="flex gap-6 text-sm uppercase tracking-widest text-zinc-500">
-        <a href="#" class="hover:text-white transition">
-          Instagram
-        </a>
-
-        <a href="#" class="hover:text-white transition">
+        <a href="https://github.com/SannDav" target="_blank" class="hover:text-white transition">
           GitHub
         </a>
 
-        <a href="#" class="hover:text-white transition">
-          Behance
+        <a href="https://instagram.com" target="_blank" class="hover:text-white transition">
+          Instagram
         </a>
       </div>
     </footer>
