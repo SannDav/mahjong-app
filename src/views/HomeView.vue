@@ -7,16 +7,16 @@ import AnimateInView from '../components/AnimateInView.vue'
 const router = useRouter()
 
 const skills = [
-  'HTML',
-  'CSS',
-  'JavaScript',
-  'PHP',
-  'Vue',
-  'Laravel',
-  'Blade',
-  'Tailwind',
-  'Python',
-  'Git'
+  { name: 'HTML', icon: 'devicon-html5-plain', color: '#e34f26' },
+  { name: 'CSS', icon: 'devicon-css3-plain', color: '#1572b6' },
+  { name: 'JavaScript', icon: 'devicon-javascript-plain', color: '#f7df1e' },
+  { name: 'PHP', icon: 'devicon-php-plain', color: '#777bb4' },
+  { name: 'Vue', icon: 'devicon-vuejs-plain', color: '#4fc08d' },
+  { name: 'Laravel', icon: 'devicon-laravel-original', color: '#ff2d20' },
+  { name: 'Blade', icon: 'devicon-laravel-plain', color: '#f05340' },
+  { name: 'Tailwind', icon: 'devicon-tailwindcss-original', color: '#06b6d4' },
+  { name: 'Python', icon: 'devicon-python-plain', color: '#3776ab' },
+  { name: 'Git', icon: 'devicon-git-plain', color: '#f05032' }
 ]
 </script>
 
@@ -35,6 +35,7 @@ const skills = [
         <div class="flex gap-6 text-sm uppercase tracking-widest text-zinc-400">
           <a href="#projects" class="hover:text-white transition">Projects</a>
           <a href="#skills" class="hover:text-white transition">Skills</a>
+          <a href="/about" class="hover:text-white transition">About</a>
           <a href="https://github.com/SannDav" target="_blank" class="hover:text-white transition">GitHub</a>
         </div>
       </nav>
@@ -187,15 +188,18 @@ const skills = [
           :blur="4"
         >
           <div
-            class="skill-card-inner group border border-zinc-800 bg-zinc-900 rounded-3xl p-6 hover:bg-white hover:text-black transition duration-500 hover:-translate-y-2"
-            :style="{ '--skill-index': index }"
+            class="skill-card-inner group border border-zinc-800 bg-zinc-900 rounded-3xl p-6 hover:bg-white hover:text-black transition-all duration-500 hover:-translate-y-2"
+            :style="{
+              '--skill-index': index,
+              '--skill-color': skill.color
+            }"
           >
-            <div class="text-4xl mb-6 group-hover:rotate-12 transition duration-500">
-              ✦
+            <div class="text-5xl mb-5 flex items-center justify-center h-14 group-hover:scale-110 transition-transform duration-500">
+              <i :class="[skill.icon + ' colored', 'text-5xl']"></i>
             </div>
 
-            <h4 class="font-bold uppercase tracking-wide text-sm">
-              {{ skill }}
+            <h4 class="font-bold uppercase tracking-wide text-sm text-center">
+              {{ skill.name }}
             </h4>
           </div>
         </AnimateInView>
@@ -322,5 +326,35 @@ const skills = [
 
 .playground-card {
   will-change: transform;
+}
+
+.skill-card-inner {
+  position: relative;
+}
+
+.skill-card-inner::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--skill-color);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s;
+  filter: blur(8px);
+}
+
+.skill-card-inner:hover::before {
+  opacity: 0.15;
+}
+
+.skill-card-inner i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-card-inner:hover i {
+  filter: brightness(1.2);
 }
 </style>
