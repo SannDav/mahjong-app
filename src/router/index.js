@@ -22,6 +22,13 @@ const router = createRouter({
       component: AboutView,
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0, behavior: 'instant' }
+    }
+  },
 })
 
 export default router
